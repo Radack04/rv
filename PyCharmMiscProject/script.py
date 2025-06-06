@@ -45,16 +45,11 @@ def indiv_info():
         # Years at company
         random.randint(5,10),
 
-        # Prev companies (count)
-        random.randint(0,4),
-
-
         # Deadlines missed
         random.randint(0,3),
 
         # hours late this year
         random.randint(0,5),
-
 
         # project count
         random.randint(3,10),
@@ -106,6 +101,7 @@ def gen_hr_data(count):
             random.randint(3, 10),
 
          ])
+    return list
 
 def recent_raises_bonus():
     id = ids
@@ -114,6 +110,37 @@ def recent_raises_bonus():
 
     for i in id:
         list.append([i,random.randint(0,25)/10,y_n(),get_rand_date()])
+
+    return list
+
+def prev_companies():
+    id = ids
+    list = []
+    company_list = ["Apple",
+    "Microsoft",
+    "Google",
+    "Amazon",
+    "Meta",
+    "Nvidia",
+    "Intel",
+    "IBM",
+    "Oracle",
+    "Salesforce",
+    "Adobe",
+    "Cisco",
+    "Dell",
+    "HP",
+    "Spotify",
+    "Shopify",
+    "Zoom",
+    "Uber",
+    "Airbnb",
+    "CrowdStrike"]
+
+    for i in id:
+        company = random.randint(0,6)
+        for x in range(company):
+            list.append([i,get_rand_date(),random.choice(company_list)])
 
     return list
 
@@ -136,19 +163,7 @@ if __name__ == '__main__':
     #            "Deadlines Missed,Hours Late this Year,Number of Peers Promoted,Number of High Profile "
     #            "Projects,Bonus Last Year")
 
-    role_headers = ("Employee ID,Turnover Rate,Recent Raise,Number of Mgmt Roles,PTO Days")
-
-    with open("role.csv", 'w') as csvfile:
-        csvfile.write(role_headers+"\n")
-        for row in full_file:
-            # write row to file
-            temp = ",".join(str(val) for val in row)
-            csvfile.write(temp+"\n")
-
-    with open("role.csv", "r") as csvfile:
-        content = csvfile.read()
-        print(content)
-
+    role_headers = ("Employee ID,Messages per Week,Date last Promoted,PTO Days,Performance Avg,Years at Company,Deadlines Missed,Hours Late,Project Count")
 
     indiv_headers = "Employee ID,"
     indiv_file = indiv_info()
@@ -185,3 +200,12 @@ if __name__ == '__main__':
             # write row to file
             temp = ",".join(str(val) for val in row)
             csvfile.write(temp+"\n")
+
+    past_work_headers = "Employee ID,Date,Company Name"
+    past_work_file = prev_companies()
+    with open("past_work.csv", 'w') as csvfile:
+        csvfile.write(past_work_headers + "\n")
+        for row in raise_file:
+            # write row to file
+            temp = ",".join(str(val) for val in row)
+            csvfile.write(temp + "\n")
