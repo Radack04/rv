@@ -127,7 +127,7 @@ def gen_pos_data(count):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
-    full_file = return_role_info(ids)
+    full_file = indiv_info()
 
     # create csv
     # headers = ("Employee ID,Turnover Rate,Recent Raise,Messages per Week,Number of Mgmt Roles,"
@@ -148,3 +148,40 @@ if __name__ == '__main__':
     with open("role.csv", "r") as csvfile:
         content = csvfile.read()
         print(content)
+
+
+    indiv_headers = "Employee ID,"
+    indiv_file = indiv_info()
+    with open("indiv.csv", 'w') as csvfile:
+        csvfile.write(indiv_headers+"\n")
+        for row in indiv_file:
+            # write row to file
+            temp = ",".join(str(val) for val in row)
+            csvfile.write(temp+"\n")
+
+    last_promo_headers = "Employee ID,Date"
+    promo_file = gen_last_promo()
+    with open("promo.csv", 'w') as csvfile:
+        csvfile.write(last_promo_headers+"\n")
+        for row in promo_file:
+            # write row to file
+            temp = ",".join(str(val) for val in row)
+            csvfile.write(temp+"\n")
+
+    hr_headers = "Employee ID,Date,Turnover,Manamegent Roles,Division,Promotion Rate,Training Hours,Peers Prommoted"
+    hr_file = gen_hr_data(len(ids))
+    with open("hr.csv", 'w') as csvfile:
+        csvfile.write(hr_headers+"\n")
+        for row in hr_file:
+            # write row to file
+            temp = ",".join(str(val) for val in row)
+            csvfile.write(temp+"\n")
+
+    recent_raises_bonus_headers = "Employee ID,Bonus,Raise Date"
+    raise_file = recent_raises_bonus()
+    with open("raisebonus.csv", 'w') as csvfile:
+        csvfile.write(recent_raises_bonus_headers+"\n")
+        for row in raise_file:
+            # write row to file
+            temp = ",".join(str(val) for val in row)
+            csvfile.write(temp+"\n")
